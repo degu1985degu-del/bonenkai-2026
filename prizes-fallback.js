@@ -1,7 +1,7 @@
 // prizes.json から生成。更新は python3 sync-fallback.py で行ってください。
 window.PRIZES_FALLBACK = {
   "total_label": "400万円",
-  "total_count": 39,
+  "total_count": 33,
   "items": [
     {
       "no": 1,
@@ -63,34 +63,6 @@ window.PRIZES_FALLBACK = {
       "name": "AirPods Pro 3",
       "qty": 5,
       "image": "images/products/apple-airpods-pro-3.webp"
-    },
-    {
-      "no": 9,
-      "category": "AI利用権",
-      "name": "Claude Max（20x）3か月分",
-      "qty": 1,
-      "image": "images/products/claude-brand.webp"
-    },
-    {
-      "no": 10,
-      "category": "AI利用権",
-      "name": "Claude Max（5x）3か月分",
-      "qty": 1,
-      "image": "images/products/claude-brand.webp"
-    },
-    {
-      "no": 11,
-      "category": "AI利用権",
-      "name": "Claude Pro 1年分",
-      "qty": 2,
-      "image": "images/products/claude-brand.webp"
-    },
-    {
-      "no": 12,
-      "category": "AI利用権",
-      "name": "Claude Pro 3か月分",
-      "qty": 2,
-      "image": "images/products/claude-brand.webp"
     }
   ]
 };
