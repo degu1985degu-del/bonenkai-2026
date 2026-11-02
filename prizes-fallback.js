@@ -1,7 +1,7 @@
 // prizes.json から生成。更新は python3 sync-fallback.py で行ってください。
 window.PRIZES_FALLBACK = {
   "total_label": "400万円",
-  "total_count": 38,
+  "total_count": 39,
   "items": [
     {
       "no": 1,
@@ -47,7 +47,7 @@ window.PRIZES_FALLBACK = {
       "no": 6,
       "category": "家電",
       "name": "Dyson HushJet 空気清浄機",
-      "qty": 2,
+      "qty": 3,
       "image": "images/products/dyson-hushjet.webp"
     },
     {
