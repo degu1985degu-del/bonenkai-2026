@@ -433,3 +433,13 @@ h2 { font-weight: 550; font-size: 35px; line-height: 1.6; letter-spacing: -.025e
   .prize-grid { grid-template-columns: repeat(3, 1fr); }
   .prize-card, .secret-card { break-inside: avoid; }
 }
+
+/* 実写真カード：ダークの額縁の中に、明るいマットを敷いて商品写真を置く。 */
+.prize-visual.has-photo { isolation: isolate; background: radial-gradient(ellipse at 50% 30%, #2c3328, #161b15 72%); border-color: #d2b97933; }
+.prize-visual.has-photo::before { content: ""; position: absolute; inset: 12px; border-radius: 14px; background: linear-gradient(180deg, #fdfcf8, #f1ede2); box-shadow: inset 0 0 0 1px #d2b97966, 0 10px 26px #0007; z-index: 0; }
+.prize-visual.has-photo::after { display: none; }
+.prize-visual.has-photo .prize-image { position: absolute; inset: 12px; width: calc(100% - 24px); height: calc(100% - 24px); padding: 16px 18px; box-sizing: border-box; object-fit: contain; mix-blend-mode: multiply; border-radius: 14px; z-index: 1; transition: transform .35s ease; }
+.prize-card:hover .prize-visual.has-photo .prize-image { transform: scale(1.035); }
+.prize-card:hover .prize-visual.has-photo { border-color: #d2b97988; }
+.prize-visual.has-photo .prize-quantity { top: 20px; right: 20px; color: #f3e6c4; background: #151a14e0; border-color: #c9b07a80; }
+@media (prefers-reduced-motion: reduce) { .prize-card:hover .prize-visual.has-photo .prize-image { transform: none; } }

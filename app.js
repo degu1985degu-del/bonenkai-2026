@@ -93,9 +93,11 @@
       photo.addEventListener('load', () => {
         art.hidden = true;
         photo.hidden = false;
+        visual.classList.add('has-photo');
       }, { once: true });
       photo.addEventListener('error', () => {
         photo.remove();
+        visual.classList.remove('has-photo');
         art.hidden = false;
       }, { once: true });
       photo.src = imagePath;
