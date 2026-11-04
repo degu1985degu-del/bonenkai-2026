@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const categories = new Set(['家電', 'Apple', 'AI利用権', '近日発表']);
+  const categories = new Set(['家電', 'Apple', 'オーディオ', 'AI利用権', '近日発表']);
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const runningAnimations = new Set();
   let currentData = null;
@@ -31,6 +31,7 @@
         || (item.model !== undefined && typeof item.model !== 'string')
         || (item.image !== undefined && typeof item.image !== 'string')
         || (item.upcoming !== undefined && typeof item.upcoming !== 'boolean')
+        || (item.hint !== undefined && typeof item.hint !== 'string')
         || (!item.secret && !categories.has(item.category))) {
         throw new Error('景品の項目に不正な値があります。');
       }
@@ -57,7 +58,9 @@
   function artType(item) {
     if (item.category === 'AI利用権') return 'claude';
     if (/Mac mini/i.test(item.name)) return 'mini';
-    if (/AirPods/i.test(item.name)) return 'airpods';
+    if (/AirPods|FreeClip/i.test(item.name)) return 'airpods';
+    if (/iPad|Apple Watch/i.test(item.name)) return 'mini';
+    if (/加湿/.test(item.name)) return 'purifier';
     if (/コーヒー|デロンギ/.test(item.name)) return 'coffee';
     if (/ホットクック/.test(item.name)) return 'cooker';
     if (/空気清浄|Dyson/i.test(item.name)) return 'purifier';
@@ -147,11 +150,28 @@
     card.append(
       label,
       art,
-      element('h3', 'secret-title', 'その正体は、近日公開。'),
+      element('h3', 'secret-title', item.hint ? `${item.hint}。中身は当日のお楽しみ。` : 'その正体は、近日公開。'),
       element('p', 'secret-quantity', `${item.qty}本`),
       element('p', 'secret-note', 'コミュニティの一年を締めくくる、特別な景品。')
     );
     return card;
+  }
+
+  function renderDrawOrder() {
+    const list = document.querySelector('#draw-order-list');
+    if (!list || !currentData) return;
+    const ordered = currentData.items
+      .map((item, index) => ({ item, order: Number.isSafeInteger(item.no) ? item.no : index + 1 }))
+      .sort((a, b) => a.order - b.order);
+    list.replaceChildren(...ordered.map(({ item, order }) => {
+      const row = element('li', item.secret ? 'draw-order-item is-special' : 'draw-order-item');
+      row.append(
+        element('span', 'draw-order-no', String(order).padStart(2, '0')),
+        element('span', 'draw-order-name', item.name),
+        element('span', 'draw-order-qty', `${item.qty}本`)
+      );
+      return row;
+    }));
   }
 
   function showReveal(node) {
@@ -322,6 +342,7 @@
         special.replaceChildren(...currentData.items.filter((item) => item.secret).map(createSecretCard));
       }
       renderLineup();
+      renderDrawOrder();
       observeReveals();
     } catch {
       showNotice('景品情報を読み込めませんでした。時間をおいてもう一度ご確認ください。');

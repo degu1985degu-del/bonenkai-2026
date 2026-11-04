@@ -5,38 +5,43 @@ window.PRIZES_FALLBACK = {
   "items": [
     {
       "no": 1,
-      "category": "特賞",
-      "name": "特賞（近日公開）",
-      "tier": "30万円級",
-      "qty": 1,
-      "secret": true
+      "category": "Apple",
+      "name": "AirPods 5",
+      "qty": 3,
+      "image": "images/products/apple-airpods-5.webp"
     },
     {
       "no": 2,
-      "category": "特賞",
-      "name": "特賞（近日公開）",
-      "tier": "20万円級",
-      "qty": 3,
-      "secret": true
+      "category": "家電",
+      "name": "象印 スチーム式加湿器",
+      "model": "EE-DG50",
+      "qty": 4,
+      "image": "images/products/zojirushi-ee-dg50.webp"
     },
     {
       "no": 3,
-      "category": "家電",
-      "name": "象印 圧力IH炊飯ジャー 炎舞炊き",
-      "model": "NW-NC10-BA（ブラック）",
-      "qty": 10,
-      "image": "images/products/zojirushi-nw-nc10-ba.webp"
+      "category": "オーディオ",
+      "name": "HUAWEI FreeClip 2",
+      "model": "イヤーカフ型オープンイヤーイヤホン",
+      "qty": 4,
+      "image": "images/products/huawei-freeclip-2.webp"
     },
     {
       "no": 4,
-      "category": "家電",
-      "name": "デロンギ マグニフィカ スタート 全自動コーヒーマシン",
-      "model": "ECAM22020B（ブラック）",
-      "qty": 5,
-      "image": "images/products/delonghi-ecam22020b.webp"
+      "category": "Apple",
+      "name": "AirPods Pro 3",
+      "qty": 3,
+      "image": "images/products/apple-airpods-pro-3.webp"
     },
     {
       "no": 5,
+      "category": "家電",
+      "name": "Dyson HushJet 空気清浄機",
+      "qty": 5,
+      "image": "images/products/dyson-hushjet.webp"
+    },
+    {
+      "no": 6,
       "category": "家電",
       "name": "シャープ ヘルシオ ホットクック",
       "model": "KN-HW16K-B（プレミアムブラック）",
@@ -44,33 +49,57 @@ window.PRIZES_FALLBACK = {
       "image": "images/products/sharp-hotcook-kn-hw16k-b.webp"
     },
     {
-      "no": 6,
-      "category": "家電",
-      "name": "Dyson HushJet 空気清浄機",
-      "qty": 3,
-      "image": "images/products/dyson-hushjet.webp"
-    },
-    {
       "no": 7,
       "category": "Apple",
-      "name": "Mac mini",
-      "qty": 1,
-      "image": "images/products/apple-mac-mini.webp"
+      "name": "Apple Watch Series 12",
+      "qty": 3,
+      "image": "images/products/apple-watch-series-12.webp"
     },
     {
       "no": 8,
-      "category": "Apple",
-      "name": "AirPods Pro 3",
-      "qty": 5,
-      "image": "images/products/apple-airpods-pro-3.webp"
+      "category": "家電",
+      "name": "象印 圧力IH炊飯ジャー 炎舞炊き",
+      "model": "NW-NC10-BA（ブラック）",
+      "qty": 10,
+      "image": "images/products/zojirushi-nw-nc10-ba.webp"
     },
     {
       "no": 9,
-      "category": "近日発表",
-      "name": "追加景品（近日発表）",
-      "model": "ラインナップは近日発表",
-      "qty": 17,
-      "upcoming": true
+      "category": "家電",
+      "name": "デロンギ マグニフィカ スタート 全自動コーヒーマシン",
+      "model": "ECAM22020B（ブラック）",
+      "qty": 5,
+      "image": "images/products/delonghi-ecam22020b.webp"
+    },
+    {
+      "no": 10,
+      "category": "Apple",
+      "name": "iPad mini",
+      "qty": 3,
+      "image": "images/products/apple-ipad-mini.webp"
+    },
+    {
+      "no": 11,
+      "category": "Apple",
+      "name": "Mac mini",
+      "qty": 3,
+      "image": "images/products/apple-mac-mini.webp"
+    },
+    {
+      "no": 12,
+      "category": "特賞",
+      "name": "特賞（Apple製品）",
+      "qty": 1,
+      "secret": true,
+      "hint": "Apple製品"
+    },
+    {
+      "no": 13,
+      "category": "特賞",
+      "name": "特賞（Apple製品）",
+      "qty": 1,
+      "secret": true,
+      "hint": "Apple製品"
     }
   ]
 };

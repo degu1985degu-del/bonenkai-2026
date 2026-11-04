@@ -88,20 +88,26 @@
 
     <section class="special-section" id="special" aria-labelledby="special-heading">
       <div class="section special-inner">
-        <div class="section-heading reveal"><div><p class="eyebrow section-kicker"><span>02</span> THE GRAND SURPRISE</p><h2 id="special-heading">まだ、秘密の<span class="gold-text">特賞。</span></h2></div><p class="section-intro">今年のクライマックスを飾る、<span data-special-count>4</span>本。<br>その正体は、もう少しだけお待ちください。</p></div>
+        <div class="section-heading reveal"><div><p class="eyebrow section-kicker"><span>02</span> THE GRAND SURPRISE</p><h2 id="special-heading">まだ、秘密の<span class="gold-text">特賞。</span></h2></div><p class="section-intro">今年のクライマックスを飾る、Apple製品<span data-special-count>2</span>本。<br>中身は、当日のお楽しみ。</p></div>
         <div id="special-prizes" class="special-grid"></div>
-        <p class="special-footer"><span aria-hidden="true">✧</span> 想像しながら、続報を待とう。 <span aria-hidden="true">✧</span></p>
+        <p class="special-footer"><span aria-hidden="true">✧</span> どのApple製品か、想像しながら当日を待とう。 <span aria-hidden="true">✧</span></p>
       </div>
     </section>
 
     <section class="section lineup-section" id="lineup" aria-labelledby="lineup-heading">
       <div class="section-heading reveal"><div><p class="eyebrow section-kicker"><span>03</span> THE PRIZE COLLECTION</p><h2 id="lineup-heading">「欲しかった」が、<br class="mobile-break">ここにある。</h2></div><p class="section-intro">毎日を変える家電から、次の挑戦の相棒まで。<br>あなたは、どれを狙う？</p></div>
-      <div class="lineup-toolbar"><div id="prize-filters" class="prize-filters" role="group" aria-label="景品カテゴリで絞り込み"><button type="button" data-filter="all" aria-pressed="true">すべて</button><button type="button" data-filter="家電" aria-pressed="false">家電</button><button type="button" data-filter="Apple" aria-pressed="false">Apple</button></div><span class="lineup-count" id="lineup-count">全46本</span></div>
+      <div class="lineup-toolbar"><div id="prize-filters" class="prize-filters" role="group" aria-label="景品カテゴリで絞り込み"><button type="button" data-filter="all" aria-pressed="true">すべて</button><button type="button" data-filter="家電" aria-pressed="false">家電</button><button type="button" data-filter="Apple" aria-pressed="false">Apple</button><button type="button" data-filter="オーディオ" aria-pressed="false">オーディオ</button></div><span class="lineup-count" id="lineup-count">全48本</span></div>
       <p id="lineup-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
       <p id="data-notice" class="data-notice" hidden></p>
       <div id="prize-grid" class="prize-grid"></div>
       <noscript><p class="no-script">景品一覧の表示にはJavaScriptを有効にしてください。景品総額400万円・全50本の詳細はDiscordで近日告知します。</p></noscript>
-      <p class="lineup-note">※ 写真・ロゴはイメージです。景品の詳細は今後の告知をご確認ください。</p>
+      <p class="lineup-note">※ 写真・ロゴはイメージです。色・サイズなど景品の詳細は今後の告知をご確認ください。</p>
+      <div class="draw-order reveal" id="draw-order" aria-labelledby="draw-order-heading">
+        <h3 class="draw-order-title" id="draw-order-heading">抽選の順番</h3>
+        <p class="draw-order-intro">当日は、下の順番で景品を抽選します。特賞は最後に登場します。</p>
+        <ol id="draw-order-list" class="draw-order-list"></ol>
+        <p class="draw-order-note">※ 順番・内容は変更になる場合があります。</p>
+      </div>
     </section>
 
     <section class="thanks-section" aria-labelledby="thanks-heading">
