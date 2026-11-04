@@ -443,3 +443,5 @@ h2 { font-weight: 550; font-size: 35px; line-height: 1.6; letter-spacing: -.025e
 .prize-card:hover .prize-visual.has-photo { border-color: #d2b97988; }
 .prize-visual.has-photo .prize-quantity { top: 20px; right: 20px; color: #f3e6c4; background: #151a14e0; border-color: #c9b07a80; }
 @media (prefers-reduced-motion: reduce) { .prize-card:hover .prize-visual.has-photo .prize-image { transform: none; } }
+.prize-card--upcoming .prize-visual { background: radial-gradient(ellipse at 50% 35%, #3b3429, #1e211a 70%); }
+.prize-card--upcoming .secret-art { transform: scale(.85); }

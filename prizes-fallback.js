@@ -1,7 +1,7 @@
 // prizes.json から生成。更新は python3 sync-fallback.py で行ってください。
 window.PRIZES_FALLBACK = {
   "total_label": "400万円",
-  "total_count": 33,
+  "total_count": 50,
   "items": [
     {
       "no": 1,
@@ -63,6 +63,14 @@ window.PRIZES_FALLBACK = {
       "name": "AirPods Pro 3",
       "qty": 5,
       "image": "images/products/apple-airpods-pro-3.webp"
+    },
+    {
+      "no": 9,
+      "category": "近日発表",
+      "name": "追加景品（近日発表）",
+      "model": "ラインナップは近日発表",
+      "qty": 17,
+      "upcoming": true
     }
   ]
 };

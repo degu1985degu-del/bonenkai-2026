@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const categories = new Set(['家電', 'Apple', 'AI利用権']);
+  const categories = new Set(['家電', 'Apple', 'AI利用権', '近日発表']);
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const runningAnimations = new Set();
   let currentData = null;
@@ -30,6 +30,7 @@
         || (item.secret !== undefined && typeof item.secret !== 'boolean')
         || (item.model !== undefined && typeof item.model !== 'string')
         || (item.image !== undefined && typeof item.image !== 'string')
+        || (item.upcoming !== undefined && typeof item.upcoming !== 'boolean')
         || (!item.secret && !categories.has(item.category))) {
         throw new Error('景品の項目に不正な値があります。');
       }
@@ -76,7 +77,28 @@
     return art;
   }
 
+  function createUpcomingCard(item) {
+    const card = element('article', 'prize-card prize-card--upcoming reveal');
+    card.dataset.category = item.category;
+    const visual = element('div', 'prize-visual');
+    const art = element('div', 'secret-art');
+    art.setAttribute('aria-hidden', 'true');
+    const box = element('div', 'gift-box');
+    box.append(element('span', 'gift-ribbon'));
+    art.append(box, element('span', 'gift-question', '?'));
+    visual.append(art, element('span', 'prize-quantity', `${item.qty}本`));
+    const info = element('div', 'prize-info');
+    info.append(
+      element('p', 'prize-category', '追加景品'),
+      element('h3', 'prize-name', item.name)
+    );
+    if (item.model) info.append(element('p', 'prize-model', item.model));
+    card.append(visual, info);
+    return card;
+  }
+
   function createPrizeCard(item) {
+    if (item.upcoming) return createUpcomingCard(item);
     const card = element('article', 'prize-card reveal');
     card.dataset.category = item.category;
     const visual = element('div', 'prize-visual');
