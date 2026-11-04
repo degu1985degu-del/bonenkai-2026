@@ -186,6 +186,7 @@ h2 { font-weight: 550; font-size: 35px; line-height: 1.6; letter-spacing: -.025e
 .prize-category { color: #c1ad7b; font-size: 8px; letter-spacing: .12em; margin-bottom: 8px; }
 .prize-name { font-size: 13px; font-weight: 500; line-height: 1.85; overflow-wrap: anywhere; }
 .prize-model { font-size: 9px; color: #949b8c; margin-top: 6px; line-height: 1.8; overflow-wrap: anywhere; }
+.prize-price { font-size: 9px; color: #a89a73; margin-top: 2px; letter-spacing: .03em; }
 .lineup-note { font-size: 10px; color: #9da18e; margin-top: 34px; line-height: 1.8; text-align: center; }
 .data-notice, .no-script { color: #e2c98d; line-height: 1.8; padding: 16px; border: 1px solid #e2c98d60; margin-bottom: 20px; }
 
@@ -466,3 +467,26 @@ h2 { font-weight: 550; font-size: 35px; line-height: 1.6; letter-spacing: -.025e
 @media (prefers-reduced-motion: reduce) { .prize-card:hover .prize-visual.has-photo .prize-image { transform: none; } }
 .prize-card--upcoming .prize-visual { background: radial-gradient(ellipse at 50% 35%, #3b3429, #1e211a 70%); }
 .prize-card--upcoming .secret-art { transform: scale(.85); }
+
+/* draw flow & ticket rules (抽選の流れ・チケットのルール) */
+.draw-flow, .ticket-rules { margin-top: 56px; }
+.draw-flow-title { font-size: 20px; font-weight: 550; letter-spacing: .04em; margin-bottom: 20px; color: var(--gold); }
+.draw-steps { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display: grid; grid-template-columns: repeat(5, 1fr); padding: 30px 0; }
+.draw-steps .flow-step { padding: 0 20px; border-left: 1px solid var(--border); }
+.draw-steps .flow-step:first-child { padding-left: 0; border-left: 0; }
+.draw-tip { margin-top: 20px; font-size: 13px; color: var(--gold-soft); }
+.draw-rules { border: 1px solid var(--border); padding: 20px 24px; margin-top: 20px; }
+.draw-rules h4 { font-size: 14px; font-weight: 550; margin-bottom: 10px; }
+.draw-rules ul, .ticket-notes { margin: 0; padding-left: 1.2em; font-size: 13px; line-height: 2; color: var(--muted); }
+.draw-rules strong { color: #f3eee2; font-weight: 650; }
+.ticket-summary { display: flex; gap: 48px; margin-bottom: 4px; padding: 24px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.ticket-summary > div { display: flex; flex-direction: column; }
+.ticket-num { font-size: 40px; line-height: 1.2; font-weight: 550; }
+.ticket-num small { font-size: 16px; margin-left: 2px; }
+.ticket-label { font-size: 12px; color: var(--muted); }
+.ticket-notes { margin-top: 20px; }
+@media (max-width: 760px) {
+  .draw-steps { grid-template-columns: 1fr; gap: 22px; }
+  .draw-steps .flow-step { padding: 0; border-left: 0; }
+  .ticket-summary { gap: 32px; }
+}

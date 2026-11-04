@@ -29,6 +29,7 @@
         || !Number.isSafeInteger(item.qty) || item.qty < 1
         || (item.secret !== undefined && typeof item.secret !== 'boolean')
         || (item.model !== undefined && typeof item.model !== 'string')
+        || (item.price !== undefined && (!Number.isSafeInteger(item.price) || item.price < 1))
         || (item.image !== undefined && typeof item.image !== 'string')
         || (item.upcoming !== undefined && typeof item.upcoming !== 'boolean')
         || (item.hint !== undefined && typeof item.hint !== 'string')
@@ -136,6 +137,7 @@
       element('h3', 'prize-name', item.name)
     );
     if (item.model) info.append(element('p', 'prize-model', item.model));
+    if (item.price && !item.secret) info.append(element('p', 'prize-price', `参考価格 ¥${item.price.toLocaleString('ja-JP')}（税込）`));
     if (Array.isArray(item.specs) && item.specs.length) {
       const specs = element('ul', 'prize-specs');
       specs.append(...item.specs.map((spec) => element('li', '', spec)));
@@ -228,12 +230,13 @@
     const items = currentData.items.filter((item) => !item.secret
       && (activeFilter === 'all' || item.category === activeFilter));
     grid.replaceChildren(...items.map(createPrizeCard));
-    const count = items.reduce((sum, item) => sum + item.qty, 0);
+    const countItems = activeFilter === 'all' ? currentData.items : items;
+    const count = countItems.reduce((sum, item) => sum + item.qty, 0);
     const countLabel = document.querySelector('#lineup-count');
     if (countLabel) countLabel.textContent = `全${count}本`;
     const status = document.querySelector('#lineup-status');
     if (status && announce) {
-      status.textContent = `${activeFilter === 'all' ? 'すべてのカテゴリ' : activeFilter}：${items.length}種類、全${count}本を表示しています。`;
+      status.textContent = `${activeFilter === 'all' ? 'すべてのカテゴリ' : activeFilter}：${items.length}種類、全${count}本${activeFilter === 'all' ? '（特賞を含む）' : ''}を表示しています。`;
     }
     document.querySelectorAll('#prize-filters button[data-filter]').forEach((button) => {
       const selected = button.dataset.filter === activeFilter;

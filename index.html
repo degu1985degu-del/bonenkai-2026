@@ -83,7 +83,39 @@
         <div class="flow-arrow" aria-hidden="true">↗</div>
         <article class="flow-step"><div class="step-top"><span class="step-number">03</span><span class="line-icon sparkle-icon" aria-hidden="true">✧</span></div><h3>豪華景品が当たるチャンス</h3><p>チケットが多いほどチャンスが広がる。<br>何が当たるか、その瞬間までお楽しみに。</p></article>
       </div>
-      <p class="lottery-note"><span class="status-dot" aria-hidden="true"></span> チケットの換算式・当選率・日程は、Discordで近日告知。</p>
+      <p class="lottery-note"><span class="status-dot" aria-hidden="true"></span> 第1期間・第2期間の日程は、Discordで近日お知らせ。</p>
+      <div class="draw-flow reveal" id="draw-flow" aria-labelledby="draw-flow-heading">
+        <h3 class="draw-flow-title" id="draw-flow-heading">抽選の流れ</h3>
+        <div class="draw-steps">
+          <article class="flow-step"><div class="step-top"><span class="step-number">01</span></div><h3>第1期間：応募</h3><p>チケットを好きな景品に入れてください。複数の景品に分けても、1つの景品にまとめて入れてもOKです。</p></article>
+          <article class="flow-step"><div class="step-top"><span class="step-number">02</span></div><h3>中間発表</h3><p>第1期間が終わったら、景品ごとに入った枚数の合計だけを公開します。誰が何枚入れたかは公開しません。</p></article>
+          <article class="flow-step"><div class="step-top"><span class="step-number">03</span></div><h3>第2期間：入れ直し</h3><p>応募は全部入れ直せます。何もしなければ第1期間の応募を引き継ぎます。第2期間の結果が最終応募です。</p></article>
+          <article class="flow-step"><div class="step-top"><span class="step-number">04</span></div><h3>最終発表</h3><p>第2期間が終わったら、当日の抽選の前に、景品ごとの最終の応募枚数の合計を公開します。誰が何枚入れたかは公開しません。</p></article>
+          <article class="flow-step"><div class="step-top"><span class="step-number">05</span></div><h3>当日：抽選</h3><p>専用の抽選ツールを使い、金額の小さい景品から順に、下の景品一覧の抽選順01〜13のとおり抽選します。</p></article>
+        </div>
+        <p class="draw-tip">人気の景品は当たりにくくなるかも。どこに入れるかは、作戦次第。</p>
+        <div class="draw-rules">
+          <h4>大事なルール</h4>
+          <ul>
+            <li><strong>当選は1人1個まで。当たった時点で、その人がほかの景品に入れた残りのチケットは無効になります。</strong></li>
+            <li>同じ景品が複数本あるときは1本ずつ順番に引き、当たった人はその時点で抜けます。</li>
+            <li>どの景品にも入れなかったチケットは無効です。</li>
+            <li>当日会場にいない方が当選した場合は、後日お送りします（送料は運営が負担します）。</li>
+            <li>どの景品に入れるかはご自身の判断でお願いします。当選後の景品の交換・変更には応じられません。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ticket-rules reveal" id="tickets" aria-labelledby="ticket-rules-heading">
+        <h3 class="draw-flow-title" id="ticket-rules-heading">チケットのルール</h3>
+        <div class="ticket-summary">
+          <div><span class="ticket-num gold-text">500<small>枚</small></span><span class="ticket-label">チケット合計</span></div>
+          <div><span class="ticket-num gold-text">9<small>枚</small></span><span class="ticket-label">1人あたりの上限</span></div>
+        </div>
+        <ul class="ticket-notes">
+          <li>自分のチケット枚数と内訳は、Discordのお知らせチャンネルにあるボタンから本人だけが確認できます。誰が何枚持っているかは公開しません。</li>
+          <li>チケットの譲渡・売買は禁止です。</li>
+        </ul>
+      </div>
     </section>
 
     <section class="special-section" id="special" aria-labelledby="special-heading">
@@ -96,12 +128,12 @@
 
     <section class="section lineup-section" id="lineup" aria-labelledby="lineup-heading">
       <div class="section-heading reveal"><div><p class="eyebrow section-kicker"><span>03</span> THE PRIZE COLLECTION</p><h2 id="lineup-heading">「欲しかった」が、<br class="mobile-break">ここにある。</h2></div><p class="section-intro">毎日を変える家電から、次の挑戦の相棒まで。<br>あなたは、どれを狙う？</p></div>
-      <div class="lineup-toolbar"><div id="prize-filters" class="prize-filters" role="group" aria-label="景品カテゴリで絞り込み"><button type="button" data-filter="all" aria-pressed="true">すべて</button><button type="button" data-filter="家電" aria-pressed="false">家電</button><button type="button" data-filter="Apple" aria-pressed="false">Apple</button><button type="button" data-filter="オーディオ" aria-pressed="false">オーディオ</button></div><span class="lineup-count" id="lineup-count">全48本</span></div>
+      <div class="lineup-toolbar"><div id="prize-filters" class="prize-filters" role="group" aria-label="景品カテゴリで絞り込み"><button type="button" data-filter="all" aria-pressed="true">すべて</button><button type="button" data-filter="家電" aria-pressed="false">家電</button><button type="button" data-filter="Apple" aria-pressed="false">Apple</button><button type="button" data-filter="オーディオ" aria-pressed="false">オーディオ</button></div><span class="lineup-count" id="lineup-count">全50本</span></div>
       <p id="lineup-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
       <p id="data-notice" class="data-notice" hidden></p>
       <div id="prize-grid" class="prize-grid"></div>
       <noscript><p class="no-script">景品一覧の表示にはJavaScriptを有効にしてください。景品総額400万円・全50本の詳細はDiscordで近日告知します。</p></noscript>
-      <p class="lineup-note">※ 写真・ロゴはイメージです。色・サイズなど景品の詳細は今後の告知をご確認ください。</p>
+      <p class="lineup-note">※ 価格はメーカー公式の税込参考価格（2026年11月時点）です。<br>※ 写真・ロゴはイメージです。色・サイズなど景品の詳細は今後の告知をご確認ください。</p>
       <div class="draw-order reveal" id="draw-order" aria-labelledby="draw-order-heading">
         <h3 class="draw-order-title" id="draw-order-heading">抽選の順番</h3>
         <p class="draw-order-intro">当日は、下の順番で景品を抽選します。特賞は最後に登場します。</p>
