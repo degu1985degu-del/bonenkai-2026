@@ -1,0 +1,51 @@
+/* ===== deluxe effects (演出のみ。内容は変えない) ===== */
+.fx-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.hero-inner, .hero-foot { position: relative; z-index: 1; }
+.fx-bglight { position: fixed; inset: -20vmax; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle at 20% 30%, #dfc48612, transparent 35%), radial-gradient(circle at 80% 70%, #bca8790f, transparent 38%); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx .fx-bglight { animation: fx-drift 28s ease-in-out infinite alternate; will-change: transform; }
+  @keyframes fx-drift { to { transform: translate3d(6vmax, -4vmax, 0) rotate(8deg); } }
+
+  /* gold gradient shimmer on headings */
+  .fx .gold-text, .fx .draw-flow-title, .fx .ticket-num {
+    background: linear-gradient(100deg, #bca879 0%, #f6e3b0 22%, #dfc486 40%, #fff4d2 50%, #c9ad6f 62%, #dfc486 100%);
+    background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: fx-gold 6s linear infinite; }
+  @keyframes fx-gold { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+
+  /* button gloss */
+  .fx .button-gold { position: relative; overflow: hidden; }
+  .fx .button-gold::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%;
+    background: linear-gradient(100deg, transparent, #fffbe9aa, transparent); transform: skewX(-20deg);
+    animation: fx-gloss 3.6s ease-in-out infinite; }
+  @keyframes fx-gloss { 0%, 55% { left: -60%; } 100% { left: 130%; } }
+
+  /* staged reveal (JSが付けるクラスのときだけ隠す) */
+  .fx .fx-stage { opacity: 0; transform: translate3d(0, 28px, 0); transition: opacity .8s cubic-bezier(.2,.7,.3,1), transform .8s cubic-bezier(.2,.7,.3,1); transition-delay: calc(var(--i, 0) * 90ms); }
+  .fx .fx-stage.fx-left { transform: translate3d(-36px, 0, 0); }
+  .fx .fx-stage.fx-on { opacity: 1; transform: none; }
+
+  /* draw order timeline */
+  .fx .draw-order-item { opacity: 0; transform: translate3d(-14px, 0, 0); transition: opacity .5s ease, transform .5s ease, background-color .6s ease; transition-delay: calc(var(--i, 0) * 110ms); }
+  .fx .draw-order.fx-on .draw-order-item { opacity: 1; transform: none; }
+  .fx .draw-order.fx-on .draw-order-no { animation: fx-pop .6s ease both; animation-delay: calc(var(--i, 0) * 110ms); }
+  @keyframes fx-pop { 0% { color: #fff6d8; text-shadow: 0 0 12px #f4d99a; } 100% { text-shadow: none; } }
+
+  /* prize card shine + tilt */
+  .fx .prize-card .prize-visual { position: relative; overflow: hidden; transition: transform .25s ease, box-shadow .3s ease; transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
+  .fx .prize-card .prize-visual::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(115deg, transparent 35%, #fff6dc55 50%, transparent 65%); transform: translateX(-120%); }
+  .fx .prize-card:hover .prize-visual { box-shadow: 0 14px 40px #0008, 0 0 0 1px #dfc48655; }
+  .fx .prize-card:hover .prize-visual::after { transform: translateX(120%); transition: transform .9s ease; }
+
+  /* special "?" card pulse & shine */
+  .fx .secret-card { animation: fx-pulse 3.2s ease-in-out infinite; }
+  @keyframes fx-pulse { 0%, 100% { box-shadow: 0 0 0 #dfc48600; } 50% { box-shadow: 0 0 38px #dfc4863a, inset 0 0 26px #dfc48614; } }
+  .fx .secret-card .gift-question { display: inline-block; animation: fx-q 2.4s ease-in-out infinite; }
+  @keyframes fx-q { 0%, 100% { transform: scale(1); text-shadow: 0 0 0 #fff0; } 50% { transform: scale(1.12); text-shadow: 0 0 18px #f5dc9f; } }
+  .fx .secret-card > .fx-shine { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 40%, #fff3d02e 50%, transparent 60%); background-size: 300% 100%; animation: fx-shine 4.5s ease-in-out infinite; }
+  @keyframes fx-shine { 0%, 40% { background-position: 150% 0; } 100% { background-position: -50% 0; } }
+}
+@media (prefers-reduced-motion: reduce) { .fx-canvas { display: none; } }
