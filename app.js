@@ -32,6 +32,7 @@
         || (item.image !== undefined && typeof item.image !== 'string')
         || (item.upcoming !== undefined && typeof item.upcoming !== 'boolean')
         || (item.hint !== undefined && typeof item.hint !== 'string')
+        || (item.specs !== undefined && (!Array.isArray(item.specs) || item.specs.some((spec) => typeof spec !== 'string')))
         || (!item.secret && !categories.has(item.category))) {
         throw new Error('景品の項目に不正な値があります。');
       }
@@ -135,6 +136,11 @@
       element('h3', 'prize-name', item.name)
     );
     if (item.model) info.append(element('p', 'prize-model', item.model));
+    if (Array.isArray(item.specs) && item.specs.length) {
+      const specs = element('ul', 'prize-specs');
+      specs.append(...item.specs.map((spec) => element('li', '', spec)));
+      info.append(specs);
+    }
     card.append(visual, info);
     return card;
   }

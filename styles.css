@@ -233,6 +233,10 @@ h2 { font-weight: 550; font-size: 35px; line-height: 1.6; letter-spacing: -.025e
 .prize-card[data-category="AI利用権"] .prize-visual { background: radial-gradient(ellipse at 50% 35%, #3b3429, #1e211a 70%); }
 .prize-card[data-category="Apple"] .prize-visual { background: radial-gradient(ellipse at 50% 35%, #36412e, #1b211a 70%); }
 .prize-card[data-category="オーディオ"] .prize-visual { background: radial-gradient(ellipse at 50% 35%, #3a3d36, #1b1f1a 70%); }
+.prize-specs { list-style: none; margin: 8px 0 0; padding: 8px 0 0; border-top: 1px solid #b5a16d26; }
+.prize-specs li { position: relative; padding-left: 10px; font-size: 9px; color: #a3a792; line-height: 1.8; overflow-wrap: anywhere; }
+.prize-specs li::before { content: "・"; position: absolute; left: -2px; color: #c1ad7b; }
+@media (max-width: 760px) { .prize-specs li { font-size: 8px; } }
 /* draw order (抽選の順番) */
 .draw-order { margin: 56px auto 0; max-width: 720px; border: 1px solid #b5a16d40; padding: 30px 34px 26px; background: radial-gradient(ellipse at 50% 0%, #54523b22, transparent 70%), #141813; }
 .draw-order-title { font-size: 18px; font-weight: 550; letter-spacing: .08em; text-align: center; }

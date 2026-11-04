@@ -8,7 +8,14 @@ window.PRIZES_FALLBACK = {
       "category": "Apple",
       "name": "AirPods 5",
       "qty": 3,
-      "image": "images/products/apple-airpods-5.webp"
+      "image": "images/products/apple-airpods-5.webp",
+      "model": "MKFW4J/A",
+      "specs": [
+        "H2ヘッドフォンチップ",
+        "アクティブノイズキャンセリング・外部音取り込み",
+        "パーソナライズされた空間オーディオ",
+        "充電ケース（USB-C）"
+      ]
     },
     {
       "no": 2,
@@ -31,7 +38,14 @@ window.PRIZES_FALLBACK = {
       "category": "Apple",
       "name": "AirPods Pro 3",
       "qty": 3,
-      "image": "images/products/apple-airpods-pro-3.webp"
+      "image": "images/products/apple-airpods-pro-3.webp",
+      "model": "MFHP4J/A",
+      "specs": [
+        "Apple H2ヘッドフォンチップ",
+        "アクティブノイズキャンセリング・外部音取り込み",
+        "ワークアウトのための心拍数センサー",
+        "MagSafe充電ケース（USB-C）"
+      ]
     },
     {
       "no": 5,
@@ -53,7 +67,14 @@ window.PRIZES_FALLBACK = {
       "category": "Apple",
       "name": "Apple Watch Series 12",
       "qty": 3,
-      "image": "images/products/apple-watch-series-12.webp"
+      "image": "images/products/apple-watch-series-12.webp",
+      "model": "46mm・アルミニウムケース・GPSモデル",
+      "specs": [
+        "S11チップ",
+        "常時表示Retinaディスプレイ",
+        "50メートルの耐水性能・IP6X防塵",
+        "通常使用で最大24時間のバッテリー"
+      ]
     },
     {
       "no": 8,
@@ -76,14 +97,28 @@ window.PRIZES_FALLBACK = {
       "category": "Apple",
       "name": "iPad mini",
       "qty": 3,
-      "image": "images/products/apple-ipad-mini.webp"
+      "image": "images/products/apple-ipad-mini.webp",
+      "model": "A20 Proチップ・8.5インチ・Wi-Fiモデル・128GB",
+      "specs": [
+        "Super Retina XDRディスプレイ（OLED）",
+        "5コアCPU・7コアGPU",
+        "IP67の防沫・耐水・防塵性能",
+        "Apple Pencil Pro対応"
+      ]
     },
     {
       "no": 11,
       "category": "Apple",
       "name": "Mac mini",
       "qty": 3,
-      "image": "images/products/apple-mac-mini.webp"
+      "image": "images/products/apple-mac-mini.webp",
+      "model": "MHQK4J/A",
+      "specs": [
+        "Apple M6チップ",
+        "12コアCPU・12コアGPU",
+        "16GBユニファイドメモリ",
+        "256GB SSD"
+      ]
     },
     {
       "no": 12,
