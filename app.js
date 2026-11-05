@@ -29,6 +29,7 @@
         || !Number.isSafeInteger(item.qty) || item.qty < 1
         || (item.secret !== undefined && typeof item.secret !== 'boolean')
         || (item.model !== undefined && typeof item.model !== 'string')
+        || (item.color !== undefined && typeof item.color !== 'string')
         || (item.price !== undefined && (!Number.isSafeInteger(item.price) || item.price < 1))
         || (item.image !== undefined && typeof item.image !== 'string')
         || (item.upcoming !== undefined && typeof item.upcoming !== 'boolean')
@@ -98,6 +99,7 @@
       element('h3', 'prize-name', item.name)
     );
     if (item.model) info.append(element('p', 'prize-model', item.model));
+    if (item.color) info.append(element('p', 'prize-color', `カラー：${item.color}`));
     card.append(visual, info);
     return card;
   }
@@ -137,6 +139,7 @@
       element('h3', 'prize-name', item.name)
     );
     if (item.model) info.append(element('p', 'prize-model', item.model));
+    if (item.color) info.append(element('p', 'prize-color', `カラー：${item.color}`));
     if (item.price && !item.secret) info.append(element('p', 'prize-price', `参考価格 ¥${item.price.toLocaleString('ja-JP')}（税込）`));
     if (Array.isArray(item.specs) && item.specs.length) {
       const specs = element('ul', 'prize-specs');

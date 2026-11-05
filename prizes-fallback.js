@@ -16,7 +16,8 @@ window.PRIZES_FALLBACK = {
         "アクティブノイズキャンセリング・外部音取り込み",
         "パーソナライズされた空間オーディオ",
         "充電ケース（USB-C）"
-      ]
+      ],
+      "color": "ホワイト"
     },
     {
       "no": 2,
@@ -28,7 +29,8 @@ window.PRIZES_FALLBACK = {
       "image": "images/products/zojirushi-ee-dg50.webp",
       "specs": [
         "スチーム式・加湿量480mL/h・タンク4.0L・木造8畳／プレハブ洋室13畳"
-      ]
+      ],
+      "color": "グレー（EE-DG50-HA）"
     },
     {
       "no": 3,
@@ -40,7 +42,8 @@ window.PRIZES_FALLBACK = {
       "image": "images/products/huawei-freeclip-2.webp",
       "specs": [
         "イヤーカフ型オープンイヤー・Bluetooth 6.0・IP57・最大38時間再生（ケース併用）"
-      ]
+      ],
+      "color": "ブラック（T0027-BK）"
     },
     {
       "no": 4,
@@ -55,7 +58,8 @@ window.PRIZES_FALLBACK = {
         "アクティブノイズキャンセリング・外部音取り込み",
         "ワークアウトのための心拍数センサー",
         "MagSafe充電ケース（USB-C）"
-      ]
+      ],
+      "color": "ホワイト"
     },
     {
       "no": 5,
@@ -67,7 +71,8 @@ window.PRIZES_FALLBACK = {
       "model": "SP01",
       "specs": [
         "HEPA＋活性炭フィルター・適用床面積19畳（30分）・最小運転音13.3dB"
-      ]
+      ],
+      "color": "ブラックティール（SP01BT）"
     },
     {
       "no": 6,
@@ -79,7 +84,8 @@ window.PRIZES_FALLBACK = {
       "image": "images/products/sharp-hotcook-kn-hw16k-b.webp",
       "specs": [
         "水なし自動調理鍋・調理容量1.6L・無線LAN対応"
-      ]
+      ],
+      "color": "プレミアムブラック（KN-HW16K-B）"
     },
     {
       "no": 7,
@@ -94,7 +100,8 @@ window.PRIZES_FALLBACK = {
         "常時表示Retinaディスプレイ",
         "50メートルの耐水性能・IP6X防塵",
         "通常使用で最大24時間のバッテリー"
-      ]
+      ],
+      "color": "ブラックアルミニウム／ブラックスポーツバンド M/L"
     },
     {
       "no": 8,
@@ -106,7 +113,8 @@ window.PRIZES_FALLBACK = {
       "image": "images/products/zojirushi-nw-nc10-ba.webp",
       "specs": [
         "圧力IH・5.5合炊き・ローテーションIH（4コイル）・最大40時間保温"
-      ]
+      ],
+      "color": "ブラック（NW-NC10-BA）"
     },
     {
       "no": 9,
@@ -118,7 +126,8 @@ window.PRIZES_FALLBACK = {
       "image": "images/products/delonghi-ecam22020b.webp",
       "specs": [
         "全自動（豆挽きから抽出まで）・ミルクフロッサー付き・水タンク1.8L"
-      ]
+      ],
+      "color": "ブラック（ECAM22020B）"
     },
     {
       "no": 10,
@@ -133,7 +142,8 @@ window.PRIZES_FALLBACK = {
         "5コアCPU・7コアGPU",
         "IP67の防沫・耐水・防塵性能",
         "Apple Pencil Pro対応"
-      ]
+      ],
+      "color": "ミッドナイト"
     },
     {
       "no": 11,
