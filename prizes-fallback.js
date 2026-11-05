@@ -106,19 +106,6 @@ window.PRIZES_FALLBACK = {
     {
       "no": 8,
       "category": "家電",
-      "name": "象印 圧力IH炊飯ジャー 炎舞炊き",
-      "model": "NW-NC10",
-      "qty": 10,
-      "price": 102080,
-      "image": "images/products/zojirushi-nw-nc10-ba.webp",
-      "specs": [
-        "圧力IH・5.5合炊き・ローテーションIH（4コイル）・最大40時間保温"
-      ],
-      "color": "ブラック（NW-NC10-BA）"
-    },
-    {
-      "no": 9,
-      "category": "家電",
       "name": "デロンギ マグニフィカ スタート 全自動コーヒーマシン",
       "model": "ECAM22020",
       "qty": 5,
@@ -128,6 +115,19 @@ window.PRIZES_FALLBACK = {
         "全自動（豆挽きから抽出まで）・ミルクフロッサー付き・水タンク1.8L"
       ],
       "color": "ブラック（ECAM22020B）"
+    },
+    {
+      "no": 9,
+      "category": "家電",
+      "name": "象印 圧力IH炊飯ジャー 炎舞炊き",
+      "model": "NW-NC10",
+      "qty": 10,
+      "price": 102080,
+      "image": "images/products/zojirushi-nw-nc10-ba.webp",
+      "specs": [
+        "圧力IH・5.5合炊き・ローテーションIH（4コイル）・最大40時間保温"
+      ],
+      "color": "ブラック（NW-NC10-BA）"
     },
     {
       "no": 10,
