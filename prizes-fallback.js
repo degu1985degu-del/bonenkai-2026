@@ -17,7 +17,8 @@ window.PRIZES_FALLBACK = {
         "パーソナライズされた空間オーディオ",
         "充電ケース（USB-C）"
       ],
-      "color": "ホワイト"
+      "color": "ホワイト",
+      "description": "H2ヘッドフォンチップを搭載した、Appleのワイヤレスイヤホン。アクティブノイズキャンセリングと外部音取り込みに対応し、パーソナライズされた空間オーディオも楽しめます。"
     },
     {
       "no": 2,
@@ -30,7 +31,8 @@ window.PRIZES_FALLBACK = {
       "specs": [
         "スチーム式・加湿量480mL/h・タンク4.0L・木造8畳／プレハブ洋室13畳"
       ],
-      "color": "グレー（EE-DG50-HA）"
+      "color": "グレー（EE-DG50-HA）",
+      "description": "スチーム式の象印の加湿器。加湿量は480mL/h、タンクは4.0Lで、木造8畳・プレハブ洋室13畳まで対応します。"
     },
     {
       "no": 3,
@@ -43,7 +45,8 @@ window.PRIZES_FALLBACK = {
       "specs": [
         "イヤーカフ型オープンイヤー・Bluetooth 6.0・IP57・最大38時間再生（ケース併用）"
       ],
-      "color": "ブラック（T0027-BK）"
+      "color": "ブラック（T0027-BK）",
+      "description": "耳をふさがない、イヤーカフ型のオープンイヤーイヤホン。Bluetooth 6.0とIP57に対応し、ケース併用で最大38時間再生できます。"
     },
     {
       "no": 4,
@@ -59,7 +62,8 @@ window.PRIZES_FALLBACK = {
         "ワークアウトのための心拍数センサー",
         "MagSafe充電ケース（USB-C）"
       ],
-      "color": "ホワイト"
+      "color": "ホワイト",
+      "description": "Apple H2ヘッドフォンチップを搭載した、AirPodsの上位モデル。アクティブノイズキャンセリングと外部音取り込みに加えて、ワークアウトのための心拍数センサーを備えています。"
     },
     {
       "no": 5,
@@ -72,7 +76,8 @@ window.PRIZES_FALLBACK = {
       "specs": [
         "HEPA＋活性炭フィルター・適用床面積19畳（30分）・最小運転音13.3dB"
       ],
-      "color": "ブラックティール（SP01BT）"
+      "color": "ブラックティール（SP01BT）",
+      "description": "HEPAフィルターと活性炭フィルターを備えた、Dysonの空気清浄機。適用床面積は19畳（30分）で、最小運転音は13.3dBです。"
     },
     {
       "no": 6,
@@ -85,7 +90,8 @@ window.PRIZES_FALLBACK = {
       "specs": [
         "水なし自動調理鍋・調理容量1.6L・無線LAN対応"
       ],
-      "color": "プレミアムブラック（KN-HW16K-B）"
+      "color": "プレミアムブラック（KN-HW16K-B）",
+      "description": "水を加えずに食材の水分で調理する、シャープの水なし自動調理鍋。調理容量は1.6Lで、無線LANにも対応しています。"
     },
     {
       "no": 7,
@@ -101,7 +107,8 @@ window.PRIZES_FALLBACK = {
         "50メートルの耐水性能・IP6X防塵",
         "通常使用で最大24時間のバッテリー"
       ],
-      "color": "ブラックアルミニウム／ブラックスポーツバンド M/L"
+      "color": "ブラックアルミニウム／ブラックスポーツバンド M/L",
+      "description": "S11チップを搭載したApple Watch。常時表示Retinaディスプレイと50メートルの耐水性能を備え、通常使用で最大24時間使えます。"
     },
     {
       "no": 8,
@@ -114,7 +121,8 @@ window.PRIZES_FALLBACK = {
       "specs": [
         "全自動（豆挽きから抽出まで）・ミルクフロッサー付き・水タンク1.8L"
       ],
-      "color": "ブラック（ECAM22020B）"
+      "color": "ブラック（ECAM22020B）",
+      "description": "豆挽きから抽出までを自動で行う、デロンギの全自動コーヒーマシン。ミルクフロッサー付きで、水タンクは1.8Lです。"
     },
     {
       "no": 9,
@@ -127,7 +135,8 @@ window.PRIZES_FALLBACK = {
       "specs": [
         "圧力IH・5.5合炊き・ローテーションIH（4コイル）・最大40時間保温"
       ],
-      "color": "ブラック（NW-NC10-BA）"
+      "color": "ブラック（NW-NC10-BA）",
+      "description": "4つのコイルで加熱するローテーションIHを採用した、象印の圧力IH炊飯ジャー。5.5合炊きで、最大40時間保温できます。"
     },
     {
       "no": 10,
@@ -143,7 +152,8 @@ window.PRIZES_FALLBACK = {
         "IP67の防沫・耐水・防塵性能",
         "Apple Pencil Pro対応"
       ],
-      "color": "ミッドナイト"
+      "color": "ミッドナイト",
+      "description": "A20 Proチップを搭載した、8.5インチのiPad mini。Super Retina XDRディスプレイ（OLED）とIP67の防沫・耐水・防塵性能を備え、Apple Pencil Proにも対応します。"
     },
     {
       "no": 11,
@@ -158,7 +168,8 @@ window.PRIZES_FALLBACK = {
         "12コアCPU・12コアGPU",
         "16GBユニファイドメモリ",
         "256GB SSD"
-      ]
+      ],
+      "description": "Apple M6チップを搭載した、手のひらサイズのデスクトップ。12コアCPU・12コアGPU、16GBユニファイドメモリ、256GB SSDの構成です。"
     },
     {
       "no": 12,

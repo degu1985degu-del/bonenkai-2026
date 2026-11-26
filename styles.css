@@ -491,3 +491,61 @@ h2 { font-weight: 550; font-size: 37.1px; line-height: 1.6; letter-spacing: -.02
   .draw-steps .flow-step { padding: 0; border-left: 0; }
   .ticket-summary { gap: 32px; }
 }
+
+/* 景品の詳細ポップアップ（クリック／タップで開く） */
+.prize-card.is-clickable { cursor: pointer; }
+.prize-open { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 0 4px; border: 0; border-bottom: 1px solid #dfc48655; background: none; color: var(--gold); font-size: 12px; letter-spacing: .12em; cursor: pointer; transition: color .2s, border-color .2s; }
+.prize-open:hover, .prize-card:hover .prize-open { color: #f3dfa8; border-color: var(--gold); }
+.prize-open-arrow { font-size: 11px; transition: transform .2s ease; }
+.prize-card:hover .prize-open-arrow { transform: translate(2px, -2px); }
+html.dialog-open { overflow: hidden; }
+.prize-dialog { width: min(920px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 32px); margin: auto; padding: 0; border: 1px solid #d2b97955; background: radial-gradient(ellipse at 20% 0%, #232a20, var(--surface) 60%); color: var(--text); box-shadow: 0 30px 90px #000c, 0 0 0 1px #dfc4861a, 0 0 60px #dfc4861a; overflow: hidden; }
+.prize-dialog::backdrop { background: #070907d9; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.prize-dialog-panel { position: relative; max-height: calc(100dvh - 34px); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.prize-dialog-panel::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: .7; }
+.prize-dialog-close { position: sticky; top: 0; float: right; z-index: 5; width: 46px; height: 46px; margin: 12px 12px -58px 0; display: grid; place-items: center; border: 1px solid #dfc48660; background: #111610e6; color: var(--gold); font-size: 26px; line-height: 1; cursor: pointer; transition: background .2s, color .2s; }
+.prize-dialog-close:hover { background: #dfc48622; color: #fff1c9; }
+.prize-dialog-close:focus-visible, .prize-open:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.prize-dialog-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 0; }
+.prize-dialog-visual { position: relative; min-height: 420px; display: grid; place-items: center; overflow: hidden; isolation: isolate; background: radial-gradient(ellipse at 50% 30%, #2c3328, #161b15 72%); border-right: 1px solid #d2b97922; }
+.prize-dialog-visual.has-photo::before { content: ""; position: absolute; inset: 22px; border-radius: 16px; background: linear-gradient(180deg, #fdfcf8, #f1ede2); box-shadow: inset 0 0 0 1px #d2b97966, 0 12px 30px #0008; z-index: 0; }
+.prize-dialog-image { position: absolute; inset: 22px; width: calc(100% - 44px); height: calc(100% - 44px); padding: 28px; box-sizing: border-box; object-fit: contain; mix-blend-mode: multiply; z-index: 1; }
+.prize-dialog-visual .product-art { transform: scale(1.25); }
+.prize-dialog-visual .prize-quantity { top: 32px; left: 32px; right: auto; color: #f3e6c4; background: #151a14e0; border-color: #c9b07a80; }
+.prize-dialog-info { padding: 46px 40px 36px; min-width: 0; }
+.prize-dialog-category { color: #c1ad7b; font-size: 11.4px; letter-spacing: .14em; margin: 0 56px 12px 0; }
+.prize-dialog-title { margin: 0; font-size: 26px; font-weight: 550; line-height: 1.5; letter-spacing: .02em; overflow-wrap: anywhere; padding-right: 40px; }
+.prize-dialog-desc { margin: 20px 0 0; font-size: 15px; color: #dcdccf; line-height: 2; }
+.prize-dialog-heading { margin: 26px 0 0; font-size: 12.7px; font-weight: 600; letter-spacing: .2em; color: var(--gold); }
+.prize-dialog-specs { list-style: none; margin: 10px 0 0; padding: 12px 0 0; border-top: 1px solid #b5a16d33; }
+.prize-dialog-specs li { position: relative; padding-left: 14px; font-size: 13.8px; color: #c4c7b6; line-height: 1.9; overflow-wrap: anywhere; }
+.prize-dialog-specs li::before { content: "・"; position: absolute; left: -2px; color: #c1ad7b; }
+.prize-dialog-facts { margin: 22px 0 0; padding: 0; border-top: 1px solid #b5a16d33; }
+.prize-dialog-fact { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid #ffffff10; font-size: 13.8px; line-height: 1.7; }
+.prize-dialog-fact dt { color: #a89a73; letter-spacing: .08em; }
+.prize-dialog-fact dd { margin: 0; color: #e6e3d6; overflow-wrap: anywhere; }
+.prize-dialog-note { margin: 18px 0 0; font-size: 11.4px; color: #8f9384; line-height: 1.8; }
+@media (prefers-reduced-motion: no-preference) {
+  .prize-dialog[open] { animation: prize-dialog-in .35s cubic-bezier(.2,.7,.3,1); }
+  .prize-dialog[open]::backdrop { animation: prize-dialog-fade .35s ease; }
+  @keyframes prize-dialog-in { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
+  @keyframes prize-dialog-fade { from { opacity: 0; } to { opacity: 1; } }
+}
+@media (max-width: 760px) {
+  .prize-open { font-size: 11.4px; margin-top: 8px; }
+  .prize-dialog { width: calc(100vw - 20px); max-height: calc(100dvh - 20px); }
+  .prize-dialog-panel { max-height: calc(100dvh - 22px); }
+  .prize-dialog-body { grid-template-columns: 1fr; }
+  .prize-dialog-visual { min-height: 0; height: 250px; border-right: 0; border-bottom: 1px solid #d2b97922; }
+  .prize-dialog-visual.has-photo::before, .prize-dialog-image { inset: 14px; }
+  .prize-dialog-image { width: calc(100% - 28px); height: calc(100% - 28px); padding: 16px; }
+  .prize-dialog-visual .product-art { transform: scale(.95); }
+  .prize-dialog-visual .prize-quantity { top: 22px; left: 22px; }
+  .prize-dialog-close { width: 42px; height: 42px; margin: 8px 8px -50px 0; font-size: 24px; }
+  .prize-dialog-info { padding: 24px 20px 26px; }
+  .prize-dialog-category { margin-right: 0; }
+  .prize-dialog-title { font-size: 20px; padding-right: 0; }
+  .prize-dialog-desc { font-size: 14px; line-height: 1.9; margin-top: 14px; }
+  .prize-dialog-specs li, .prize-dialog-fact { font-size: 13px; }
+}
+@media print { .prize-open { display: none; } }

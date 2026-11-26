@@ -8,6 +8,8 @@
   let activeFilter = 'all';
   let countAnimation = 0;
   let revealObserver = null;
+  let prizeDialog = null;
+  let dialogOpener = null;
 
   function element(tag, className, content) {
     const node = document.createElement(tag);
@@ -34,6 +36,7 @@
         || (item.image !== undefined && typeof item.image !== 'string')
         || (item.upcoming !== undefined && typeof item.upcoming !== 'boolean')
         || (item.hint !== undefined && typeof item.hint !== 'string')
+        || (item.description !== undefined && typeof item.description !== 'string')
         || (item.specs !== undefined && (!Array.isArray(item.specs) || item.specs.some((spec) => typeof spec !== 'string')))
         || (!item.secret && !categories.has(item.category))) {
         throw new Error('景品の項目に不正な値があります。');
@@ -146,8 +149,140 @@
       specs.append(...item.specs.map((spec) => element('li', '', spec)));
       info.append(specs);
     }
+    const open = element('button', 'prize-open');
+    open.type = 'button';
+    open.setAttribute('aria-haspopup', 'dialog');
+    open.setAttribute('aria-label', `${item.name}の詳細を見る`);
+    open.append(element('span', '', '詳細を見る'), element('span', 'prize-open-arrow', '↗'));
+    open.lastChild.setAttribute('aria-hidden', 'true');
+    info.append(open);
+    card.classList.add('is-clickable');
+    card.addEventListener('click', (event) => {
+      if (event.target.closest('a')) return;
+      const selection = window.getSelection ? String(window.getSelection()) : '';
+      if (selection && !event.target.closest('.prize-open')) return;
+      openPrizeDialog(item, open);
+    });
     card.append(visual, info);
     return card;
+  }
+
+  // ---- 景品の詳細ポップアップ（<dialog>） ----
+  function ensurePrizeDialog() {
+    if (prizeDialog) return prizeDialog;
+    const dialog = element('dialog', 'prize-dialog');
+    dialog.id = 'prize-dialog';
+    dialog.setAttribute('aria-labelledby', 'prize-dialog-title');
+    dialog.setAttribute('aria-describedby', 'prize-dialog-desc');
+    const panel = element('div', 'prize-dialog-panel');
+    const close = element('button', 'prize-dialog-close');
+    close.type = 'button';
+    close.setAttribute('aria-label', '閉じる');
+    close.append(element('span', '', '×'));
+    close.firstChild.setAttribute('aria-hidden', 'true');
+    close.addEventListener('click', () => closePrizeDialog());
+    const body = element('div', 'prize-dialog-body');
+    panel.append(close, body);
+    dialog.append(panel);
+    // 背景（パネルの外側）をクリックしたら閉じる。
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) closePrizeDialog();
+    });
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      closePrizeDialog();
+    });
+    dialog.addEventListener('close', () => {
+      document.documentElement.classList.remove('dialog-open');
+      if (dialogOpener && document.contains(dialogOpener)) dialogOpener.focus({ preventScroll: true });
+      dialogOpener = null;
+    });
+    document.body.append(dialog);
+    prizeDialog = dialog;
+    return dialog;
+  }
+
+  function buildDialogContent(item) {
+    const frag = document.createDocumentFragment();
+    const visual = element('div', 'prize-dialog-visual');
+    const art = createProductArt(item);
+    visual.append(art);
+    const imagePath = localImagePath(item.image);
+    if (imagePath) {
+      const photo = element('img', 'prize-dialog-image');
+      photo.alt = item.name;
+      photo.decoding = 'async';
+      photo.hidden = true;
+      photo.addEventListener('load', () => {
+        art.hidden = true;
+        photo.hidden = false;
+        visual.classList.add('has-photo');
+      }, { once: true });
+      photo.addEventListener('error', () => {
+        photo.remove();
+        art.hidden = false;
+      }, { once: true });
+      photo.src = imagePath;
+      visual.append(photo);
+    }
+    visual.append(element('span', 'prize-quantity', `${item.qty}本`));
+
+    const info = element('div', 'prize-dialog-info');
+    const order = Number.isSafeInteger(item.no) ? `抽選順 ${String(item.no).padStart(2, '0')}` : '';
+    info.append(element('p', 'prize-dialog-category', order ? `${item.category}　/　${order}` : item.category));
+    const title = element('h2', 'prize-dialog-title', item.name);
+    title.id = 'prize-dialog-title';
+    info.append(title);
+    const desc = element('p', 'prize-dialog-desc', item.description || '');
+    desc.id = 'prize-dialog-desc';
+    if (!item.description) desc.hidden = true;
+    info.append(desc);
+
+    if (Array.isArray(item.specs) && item.specs.length) {
+      info.append(element('h3', 'prize-dialog-heading', 'スペック'));
+      const specs = element('ul', 'prize-dialog-specs');
+      specs.append(...item.specs.map((spec) => element('li', '', spec)));
+      info.append(specs);
+    }
+    const facts = element('dl', 'prize-dialog-facts');
+    const addFact = (label, value) => {
+      if (!value) return;
+      const row = element('div', 'prize-dialog-fact');
+      row.append(element('dt', '', label), element('dd', '', value));
+      facts.append(row);
+    };
+    addFact('型番', item.model);
+    addFact('カラー', item.color);
+    addFact('本数', `${item.qty}本`);
+    if (item.price && !item.secret) addFact('参考価格', `¥${item.price.toLocaleString('ja-JP')}（税込）`);
+    info.append(facts);
+    info.append(element('p', 'prize-dialog-note', '※ 写真はイメージです。色は運営で発注した色で、指定・交換はできません。'));
+    frag.append(visual, info);
+    return frag;
+  }
+
+  function openPrizeDialog(item, opener) {
+    if (!item || item.secret || item.upcoming) return;
+    const dialog = ensurePrizeDialog();
+    const body = dialog.querySelector('.prize-dialog-body');
+    body.replaceChildren(buildDialogContent(item));
+    dialogOpener = opener || null;
+    if (dialog.open) return;
+    document.documentElement.classList.add('dialog-open');
+    if (typeof dialog.showModal === 'function') dialog.showModal();
+    else dialog.setAttribute('open', '');
+    dialog.querySelector('.prize-dialog-panel').scrollTop = 0;
+    const close = dialog.querySelector('.prize-dialog-close');
+    if (close) close.focus({ preventScroll: true });
+  }
+
+  function closePrizeDialog() {
+    if (!prizeDialog || !prizeDialog.open) return;
+    if (typeof prizeDialog.close === 'function') prizeDialog.close();
+    else {
+      prizeDialog.removeAttribute('open');
+      prizeDialog.dispatchEvent(new Event('close'));
+    }
   }
 
   function createSecretCard(item, index) {
@@ -343,6 +478,12 @@
 
   async function init() {
     bindFilters();
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && prizeDialog && prizeDialog.open) {
+        event.preventDefault();
+        closePrizeDialog();
+      }
+    });
     if (typeof reducedMotion.addEventListener === 'function') {
       reducedMotion.addEventListener('change', handleMotionChange);
     }
