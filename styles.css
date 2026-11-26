@@ -549,3 +549,62 @@ html.dialog-open { overflow: hidden; }
   .prize-dialog-specs li, .prize-dialog-fact { font-size: 13px; }
 }
 @media print { .prize-open { display: none; } }
+
+/* 特賞のスクラッチくじ */
+.secret-card.is-clickable { cursor: pointer; }
+.secret-open { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 11px 20px; border: 1px solid #dfc48680; background: linear-gradient(100deg, #dfc48618, #dfc48630, #dfc48618); color: #f0dba4; font-size: 13.8px; letter-spacing: .14em; cursor: pointer; transition: background .25s, color .25s, box-shadow .25s; }
+.secret-open:hover, .secret-card:hover .secret-open { color: #fff1c9; background: #dfc48633; box-shadow: 0 0 22px #dfc48633; }
+.secret-open:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.secret-open-icon { color: var(--gold); }
+.prize-dialog.is-scratch { width: min(620px, calc(100vw - 32px)); }
+.prize-dialog.is-scratch .prize-dialog-body { display: block; }
+.scratch-box { padding: 40px 38px 34px; text-align: center; }
+.scratch-box .prize-dialog-category { margin: 0 0 10px; }
+.scratch-box .prize-dialog-title { padding: 0; font-family: Georgia, "Times New Roman", serif; font-size: 30px; font-weight: 400; letter-spacing: .08em; color: var(--gold); }
+.scratch-lead { margin-top: 8px; }
+.scratch-stage { position: relative; margin: 22px auto 0; width: 100%; aspect-ratio: 16 / 10; border: 1px solid #dfc48666; box-shadow: 0 0 0 6px #111610, 0 0 0 7px #dfc48633, 0 18px 40px #0009; overflow: hidden; isolation: isolate; background: radial-gradient(ellipse at 50% 40%, #2f3628, #141813 75%); }
+.scratch-under { position: absolute; inset: 0; display: grid; place-items: center; padding: 18px; z-index: 0; }
+.scratch-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; touch-action: none; cursor: grab; -webkit-user-select: none; user-select: none; }
+.scratch-stage.is-scratching .scratch-canvas { cursor: grabbing; }
+.scratch-glow { position: absolute; inset: -30%; z-index: 1; pointer-events: none; opacity: 0; background: radial-gradient(circle at 50% 50%, #fff3c8aa, #dfc48644 28%, transparent 55%); }
+.scratch-prize.is-soon { display: grid; gap: 6px; justify-items: center; }
+.scratch-soon-kicker { margin: 0; font-size: 12px; letter-spacing: .32em; color: #c1ad7b; }
+.scratch-soon-title { margin: 0; font-size: clamp(38px, 9vw, 56px); font-weight: 600; letter-spacing: .14em; line-height: 1.3; color: var(--gold); text-shadow: 0 0 26px #dfc48655; }
+.scratch-soon-text { margin: 0; font-size: 13.8px; color: #d6d6c8; line-height: 1.8; }
+.scratch-prize-visual { width: min(62%, 260px); aspect-ratio: 1; margin: 0 auto 8px; padding: 10px; border-radius: 14px; background: linear-gradient(180deg, #fdfcf8, #f1ede2); }
+.scratch-prize-image { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.scratch-prize-name { margin: 0; font-size: 20px; font-weight: 550; color: var(--text); }
+.scratch-prize-model { margin: 4px 0 0; font-size: 12.7px; color: #949b8c; }
+.scratch-controls { margin-top: 18px; display: grid; gap: 8px; justify-items: center; }
+.scratch-all { padding: 11px 26px; border: 1px solid #dfc48680; background: #dfc4861a; color: var(--gold); font-size: 13.8px; letter-spacing: .14em; cursor: pointer; transition: background .2s, color .2s; }
+.scratch-all:hover:not(:disabled) { background: #dfc48633; color: #fff1c9; }
+.scratch-all:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.scratch-all:disabled { opacity: .55; cursor: default; }
+.scratch-hint { margin: 0; min-height: 1.8em; font-size: 12px; color: #9da18e; line-height: 1.8; }
+.scratch-details { text-align: left; margin-top: 8px; }
+.scratch-stage.is-revealed .scratch-canvas { opacity: 0; pointer-events: none; }
+.scratch-burst { position: absolute; left: 50%; top: 50%; z-index: 3; pointer-events: none; }
+.scratch-spark { position: absolute; left: 0; top: 0; width: 7px; height: 7px; margin: -3px 0 0 -3px; border-radius: 50%; background: #fff1c4; box-shadow: 0 0 10px #f4d99a; color: #fff1c4; font-size: 14px; line-height: 7px; text-align: center; opacity: 0; }
+.scratch-spark:not(:empty) { background: none; box-shadow: none; text-shadow: 0 0 10px #f4d99a; }
+@media (prefers-reduced-motion: no-preference) {
+  .secret-open-icon { display: inline-block; animation: fx-q 2.4s ease-in-out infinite; }
+  .scratch-stage.is-revealed .scratch-canvas { transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.3,1); transform: scale(1.06); }
+  .scratch-stage.is-revealed .scratch-glow { animation: scratch-flash 1.4s ease-out both; }
+  .scratch-stage.is-revealed { animation: scratch-shake .5s ease both; }
+  .scratch-stage.is-revealed .scratch-soon-title, .scratch-stage.is-revealed .scratch-prize { animation: scratch-pop .9s cubic-bezier(.2,.9,.3,1.3) both; }
+  .scratch-spark { animation: scratch-spark 1.2s cubic-bezier(.15,.7,.3,1) var(--d, 0s) both; }
+  @keyframes scratch-flash { 0% { opacity: 0; transform: scale(.6); } 25% { opacity: 1; } 100% { opacity: .35; transform: scale(1.1); } }
+  @keyframes scratch-shake { 0%, 100% { transform: none; } 20% { transform: translateX(-3px) rotate(-.4deg); } 45% { transform: translateX(3px) rotate(.4deg); } 70% { transform: translateX(-1px); } }
+  @keyframes scratch-pop { 0% { transform: scale(.82); filter: brightness(1.8); } 60% { transform: scale(1.06); } 100% { transform: none; filter: none; } }
+  @keyframes scratch-spark { 0% { opacity: 0; transform: translate(0, 0) scale(.4); } 15% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1); } }
+}
+.scratch-stage.is-revealed .scratch-glow { opacity: .35; }
+@media (max-width: 760px) {
+  .secret-open { font-size: 12.7px; padding: 10px 16px; margin-top: 14px; }
+  .scratch-box { padding: 30px 18px 24px; }
+  .scratch-box .prize-dialog-title { font-size: 24px; }
+  .scratch-stage { aspect-ratio: 4 / 3; box-shadow: 0 0 0 4px #111610, 0 0 0 5px #dfc48633, 0 14px 30px #0009; }
+}
+@media (max-width: 480px) { .secret-open { gap: 6px; padding: 10px 10px; letter-spacing: .04em; white-space: nowrap; font-size: 12px; } }
+.scratch-stage.has-reveal { aspect-ratio: auto; }
+.scratch-stage.has-reveal .scratch-under { position: relative; inset: auto; padding: 22px 18px; }
