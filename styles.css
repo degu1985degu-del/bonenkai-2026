@@ -608,3 +608,36 @@ html.dialog-open { overflow: hidden; }
 @media (max-width: 480px) { .secret-open { gap: 6px; padding: 10px 10px; letter-spacing: .04em; white-space: nowrap; font-size: 12px; } }
 .scratch-stage.has-reveal { aspect-ratio: auto; }
 .scratch-stage.has-reveal .scratch-under { position: relative; inset: auto; padding: 22px 18px; }
+
+/* 特賞スクラッチチャンス（1/10で大当たり） */
+.scratch-odds { display: inline-block; margin-right: 4px; color: #f6e3b0; font-weight: 600; letter-spacing: .06em; text-shadow: 0 0 14px #dfc48666; }
+.scratch-result { display: grid; gap: 6px; justify-items: center; text-align: center; }
+.scratch-win-kicker, .scratch-lose-kicker { margin: 0; font-size: 12px; letter-spacing: .34em; color: #c1ad7b; }
+.scratch-win-title { margin: 0; font-size: clamp(34px, 8vw, 50px); font-weight: 700; letter-spacing: .12em; line-height: 1.25; background: linear-gradient(100deg, #bca879, #fff4d2 45%, #dfc486 60%, #f6e3b0); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 18px #dfc48688); }
+.scratch-lose-title { margin: 0; font-size: clamp(28px, 7vw, 40px); font-weight: 600; letter-spacing: .1em; line-height: 1.3; color: #d8d6c6; }
+.scratch-stage.is-win { border-color: #f4d99a; box-shadow: 0 0 0 6px #111610, 0 0 0 7px #f4d99acc, 0 0 50px #dfc48655, 0 18px 40px #0009; }
+.scratch-stage.is-win .scratch-under { background: radial-gradient(ellipse at 50% 40%, #4a4428cc, transparent 70%); }
+.scratch-rays { position: absolute; left: 50%; top: 50%; width: 160%; aspect-ratio: 1; z-index: 0; pointer-events: none; opacity: 0; transform: translate(-50%, -50%); background: repeating-conic-gradient(from 0deg, #f4d99a2e 0deg 8deg, transparent 8deg 20deg); border-radius: 50%; -webkit-mask: radial-gradient(circle, #000 20%, transparent 68%); mask: radial-gradient(circle, #000 20%, transparent 68%); }
+.scratch-stage.is-win .scratch-rays { opacity: 1; }
+.scratch-again { padding: 11px 26px; border: 1px solid #dfc486; background: linear-gradient(100deg, #dfc48626, #dfc48644, #dfc48626); color: #f6e3b0; font-size: 13.8px; letter-spacing: .14em; cursor: pointer; transition: background .2s, color .2s, box-shadow .2s; }
+.scratch-again:hover { color: #fff1c9; box-shadow: 0 0 20px #dfc48644; }
+.scratch-again:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.scratch-note { margin: 18px 0 0; font-size: 11.4px; color: #8f9384; line-height: 1.8; }
+.scratch-box { position: relative; overflow: hidden; }
+.scratch-burst.is-big .scratch-spark { width: 9px; height: 9px; font-size: 18px; }
+.scratch-rain { position: absolute; inset: 0; z-index: 6; pointer-events: none; overflow: hidden; }
+.scratch-rain-bit { position: absolute; top: -20px; width: 7px; height: 12px; background: linear-gradient(180deg, #fff4d2, #c9a65e); border-radius: 1px; opacity: 0; transform: rotate(var(--r)); }
+@media (prefers-reduced-motion: no-preference) {
+  .scratch-stage.is-win .scratch-rays { animation: scratch-rays 9s linear infinite, scratch-fade-in .8s ease both; }
+  .scratch-stage.is-revealed.is-win { animation: scratch-shake .6s ease both, scratch-win-pulse 2.4s ease-in-out .6s infinite; }
+  .scratch-stage.is-win .scratch-win-title { animation: scratch-pop 1s cubic-bezier(.2,.9,.3,1.4) both, fx-gold-text 3s linear 1s infinite; background-size: 250% 100%; }
+  .scratch-stage.is-win .scratch-prize-visual { animation: scratch-pop 1.1s cubic-bezier(.2,.9,.3,1.3) .15s both; }
+  .scratch-rain-bit { animation: scratch-rain var(--t, 2s) cubic-bezier(.3,.5,.6,1) var(--d, 0s) both; }
+  @keyframes scratch-rays { to { transform: translate(-50%, -50%) rotate(360deg); } }
+  @keyframes scratch-fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes scratch-win-pulse { 0%, 100% { box-shadow: 0 0 0 6px #111610, 0 0 0 7px #f4d99acc, 0 0 30px #dfc48633, 0 18px 40px #0009; } 50% { box-shadow: 0 0 0 6px #111610, 0 0 0 7px #fff1c4, 0 0 70px #dfc48688, 0 18px 40px #0009; } }
+  @keyframes fx-gold-text { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+  @keyframes scratch-rain { 0% { opacity: 0; transform: translateY(0) rotate(var(--r)); } 10% { opacity: 1; } 100% { opacity: 0; transform: translateY(110vh) rotate(calc(var(--r) + 540deg)); } }
+}
+@media (max-width: 760px) { .scratch-note { font-size: 10.8px; } }
+@media (max-width: 480px) { .scratch-box .prize-dialog-title { font-size: 20px; letter-spacing: .03em; } }

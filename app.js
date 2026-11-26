@@ -2,6 +2,8 @@
   'use strict';
 
   const categories = new Set(['家電', 'Apple', 'オーディオ', 'AI利用権', '近日発表']);
+  // 特賞スクラッチの当たり確率（ここだけ変えれば全体に反映）。0.1 = 10回に1回。
+  const SCRATCH_WIN_RATE = 0.1;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const runningAnimations = new Set();
   let currentData = null;
@@ -290,16 +292,12 @@
   }
 
   // ---- 特賞のスクラッチくじ ----
-  function buildRevealContent(item) {
-    const wrap = element('div', 'scratch-prize');
+  function buildWinContent(item) {
+    const wrap = element('div', 'scratch-prize scratch-result is-win');
+    wrap.append(element('p', 'scratch-win-kicker', '✦ JACKPOT ✦'), element('p', 'scratch-win-title', '大当たり！'));
     const reveal = item.reveal;
     if (!reveal) {
-      wrap.classList.add('is-soon');
-      wrap.append(
-        element('p', 'scratch-soon-kicker', 'COMING SOON'),
-        element('p', 'scratch-soon-title', '近日公開'),
-        element('p', 'scratch-soon-text', '特賞の中身は、後日ここで発表します。お楽しみに。')
-      );
+      wrap.append(element('p', 'scratch-soon-text', '特賞の中身は、後日ここで発表します。お楽しみに。'));
       return wrap;
     }
     const imagePath = localImagePath(reveal.image);
@@ -315,6 +313,16 @@
     }
     wrap.append(element('p', 'scratch-prize-name', reveal.name));
     if (reveal.model) wrap.append(element('p', 'scratch-prize-model', reveal.model));
+    return wrap;
+  }
+
+  function buildLoseContent() {
+    const wrap = element('div', 'scratch-prize scratch-result is-lose');
+    wrap.append(
+      element('p', 'scratch-lose-kicker', 'TRY AGAIN'),
+      element('p', 'scratch-lose-title', '残念、はずれ…'),
+      element('p', 'scratch-soon-text', 'もう一回！ 次こそ特賞の中身が見えるかも。')
+    );
     return wrap;
   }
 
@@ -341,6 +349,16 @@
     addFact('本数', `${item.qty}本`);
     if (facts.childElementCount) info.append(facts);
     return info;
+  }
+
+  function wonKey(item) {
+    return `bonenkai2026-scratch-won-${Number.isSafeInteger(item.no) ? item.no : 'x'}`;
+  }
+  function hasWon(item) {
+    try { return window.localStorage.getItem(wonKey(item)) === '1'; } catch { return false; }
+  }
+  function rememberWin(item) {
+    try { window.localStorage.setItem(wonKey(item), '1'); } catch { /* 保存できなくても演出は続ける */ }
   }
 
   function paintScratchSurface(canvas) {
@@ -476,89 +494,145 @@
     return { revealAll };
   }
 
-  function burstSparkles(stage) {
+  function burstSparkles(stage, big) {
     if (reducedMotion.matches) return;
-    const layer = element('div', 'scratch-burst');
+    const layer = element('div', big ? 'scratch-burst is-big' : 'scratch-burst');
     layer.setAttribute('aria-hidden', 'true');
-    for (let i = 0; i < 26; i++) {
+    const count = big ? 64 : 26;
+    for (let i = 0; i < count; i++) {
       const spark = element('span', 'scratch-spark', i % 3 === 0 ? '✦' : '');
-      const angle = (Math.PI * 2 * i) / 26 + Math.random() * 0.3;
-      const dist = 90 + Math.random() * 140;
+      const angle = (Math.PI * 2 * i) / count + Math.random() * 0.3;
+      const dist = (big ? 120 : 90) + Math.random() * (big ? 260 : 140);
       spark.style.setProperty('--dx', `${Math.cos(angle) * dist}px`);
       spark.style.setProperty('--dy', `${Math.sin(angle) * dist}px`);
-      spark.style.setProperty('--d', `${(Math.random() * 0.25).toFixed(2)}s`);
+      spark.style.setProperty('--d', `${(Math.random() * (big ? 0.6 : 0.25)).toFixed(2)}s`);
       layer.append(spark);
     }
     stage.append(layer);
-    window.setTimeout(() => layer.remove(), 1800);
+    window.setTimeout(() => layer.remove(), big ? 2600 : 1800);
+  }
+
+  function goldRain(container) {
+    if (reducedMotion.matches) return;
+    const layer = element('div', 'scratch-rain');
+    layer.setAttribute('aria-hidden', 'true');
+    for (let i = 0; i < 36; i++) {
+      const bit = element('span', 'scratch-rain-bit');
+      bit.style.left = `${Math.random() * 100}%`;
+      bit.style.setProperty('--d', `${(Math.random() * 0.9).toFixed(2)}s`);
+      bit.style.setProperty('--t', `${(1.6 + Math.random() * 1.2).toFixed(2)}s`);
+      bit.style.setProperty('--r', `${Math.round(Math.random() * 360)}deg`);
+      layer.append(bit);
+    }
+    container.append(layer);
+    window.setTimeout(() => layer.remove(), 3400);
   }
 
   function openScratchDialog(item, number, opener) {
     if (!item || !item.secret) return;
     const dialog = ensurePrizeDialog();
     dialog.classList.add('is-scratch');
-    const body = dialog.querySelector('.prize-dialog-body');
-    const box = element('div', 'scratch-box');
-    box.append(element('p', 'prize-dialog-category', `THE GRAND SURPRISE　/　特賞 ${number}`));
-    const title = element('h2', 'prize-dialog-title', `特賞 ${number}`);
-    title.id = 'prize-dialog-title';
-    const lead = element('p', 'prize-dialog-desc scratch-lead', '金色の面を削って、特賞をのぞいてみよう。');
-    lead.id = 'prize-dialog-desc';
-    box.append(title, lead);
-
-    const stage = element('div', 'scratch-stage');
-    const under = element('div', 'scratch-under');
-    under.setAttribute('aria-hidden', 'true');
-    under.append(buildRevealContent(item));
-    const canvas = element('canvas', 'scratch-canvas');
-    canvas.setAttribute('role', 'img');
-    canvas.setAttribute('aria-label', 'スクラッチ面。削ると特賞の情報が出てきます。');
-    const glow = element('span', 'scratch-glow');
-    glow.setAttribute('aria-hidden', 'true');
-    stage.append(under, glow, canvas);
-
-    const controls = element('div', 'scratch-controls');
-    const all = element('button', 'scratch-all', 'すべて削る');
-    all.type = 'button';
-    const hint = element('p', 'scratch-hint', '半分くらい削ると、一気にめくれます。');
-    controls.append(all, hint);
-    const status = element('p', 'sr-only');
-    status.setAttribute('aria-live', 'polite');
-    const details = buildRevealDetails(item);
-    details.hidden = true;
-    box.append(stage, controls, status, details);
-    body.replaceChildren(box);
-
     dialogOpener = opener || null;
+    renderScratch(dialog, item, number, { showSaved: hasWon(item) });
     if (!dialog.open) {
       document.documentElement.classList.add('dialog-open');
       if (typeof dialog.showModal === 'function') dialog.showModal();
       else dialog.setAttribute('open', '');
     }
     dialog.querySelector('.prize-dialog-panel').scrollTop = 0;
+    const close = dialog.querySelector('.prize-dialog-close');
+    if (close) close.focus({ preventScroll: true });
+  }
 
-    const onReveal = () => {
+  function renderScratch(dialog, item, number, options) {
+    const showSaved = Boolean(options && options.showSaved);
+    const body = dialog.querySelector('.prize-dialog-body');
+    const box = element('div', 'scratch-box');
+    box.append(element('p', 'prize-dialog-category', `THE GRAND SURPRISE　/　特賞 ${number}`));
+    const title = element('h2', 'prize-dialog-title', `特賞 ${number} スクラッチチャンス`);
+    title.id = 'prize-dialog-title';
+    const lead = element('p', 'prize-dialog-desc scratch-lead');
+    lead.id = 'prize-dialog-desc';
+    lead.append(element('strong', 'scratch-odds', `${Math.round(1 / SCRATCH_WIN_RATE)}回に1回のチャンス！`), document.createTextNode(' 当たりが出たら、特賞の中身が見られます。'));
+    box.append(title, lead);
+
+    // 当たり／はずれは開くたびにブラウザ内で決める（LPの演出。抽選とは無関係）。
+    const win = showSaved || Math.random() < SCRATCH_WIN_RATE;
+    const stage = element('div', 'scratch-stage');
+    const under = element('div', 'scratch-under');
+    under.setAttribute('aria-hidden', 'true');
+    under.append(win ? buildWinContent(item) : buildLoseContent());
+    const glow = element('span', 'scratch-glow');
+    glow.setAttribute('aria-hidden', 'true');
+    const rays = element('span', 'scratch-rays');
+    rays.setAttribute('aria-hidden', 'true');
+    stage.append(rays, glow, under);
+    let canvas = null;
+    if (!showSaved) {
+      canvas = element('canvas', 'scratch-canvas');
+      canvas.setAttribute('role', 'img');
+      canvas.setAttribute('aria-label', 'スクラッチ面。削ると結果が出てきます。');
+      stage.append(canvas);
+    }
+
+    const controls = element('div', 'scratch-controls');
+    const all = element('button', 'scratch-all', 'すべて削る');
+    all.type = 'button';
+    const again = element('button', 'scratch-again', 'もう一度削る');
+    again.type = 'button';
+    again.hidden = true;
+    again.addEventListener('click', () => {
+      renderScratch(dialog, item, number, { showSaved: false });
+      const next = dialog.querySelector('.scratch-all');
+      if (next) next.focus({ preventScroll: true });
+    });
+    const hint = element('p', 'scratch-hint', '半分くらい削ると、一気にめくれます。');
+    controls.append(all, again, hint);
+    const status = element('p', 'sr-only');
+    status.setAttribute('aria-live', 'polite');
+    const details = buildRevealDetails(item);
+    details.hidden = true;
+    const note = element('p', 'scratch-note', '※ このスクラッチはLP上のお楽しみ演出です。忘年会の抽選・当選結果とは関係ありません。');
+    box.append(stage, controls, status, details, note);
+    body.replaceChildren(box);
+
+    const showResult = (instant) => {
       stage.classList.remove('is-scratching');
-      stage.classList.add('is-revealed');
-      if (item.reveal) stage.classList.add('has-reveal');
+      stage.classList.add('is-revealed', win ? 'is-win' : 'is-lose');
+      if (win && item.reveal) stage.classList.add('has-reveal');
       under.removeAttribute('aria-hidden');
-      all.disabled = true;
-      all.textContent = 'めくれました';
-      hint.textContent = item.reveal ? '' : '中身の発表まで、もう少しお待ちください。';
-      details.hidden = !details.childElementCount;
-      status.textContent = item.reveal ? `特賞 ${number}：${item.reveal.name}` : `特賞 ${number}：近日公開`;
-      burstSparkles(stage);
-      if (reducedMotion.matches) canvas.remove();
-      else window.setTimeout(() => canvas.remove(), 900);
+      all.hidden = true;
+      again.hidden = false;
+      if (win) {
+        rememberWin(item);
+        again.textContent = 'もう一度スクラッチに挑戦';
+        hint.textContent = showSaved ? '前に当てた特賞です。もう一度挑戦することもできます。' : 'おめでとうございます！ この特賞は次からも見られます。';
+        details.hidden = !details.childElementCount;
+        status.textContent = `大当たり！ 特賞 ${number}：${item.reveal ? item.reveal.name : '近日公開'}`;
+        if (!instant) {
+          burstSparkles(stage, true);
+          goldRain(box);
+        }
+      } else {
+        hint.textContent = `当たりは${Math.round(1 / SCRATCH_WIN_RATE)}回に1回。何度でも挑戦できます。`;
+        status.textContent = '残念、はずれ。もう一度削れます。';
+        if (!instant) burstSparkles(stage, false);
+      }
+      if (canvas) {
+        if (reducedMotion.matches || instant) canvas.remove();
+        else window.setTimeout(() => canvas.remove(), 900);
+      }
     };
+    if (showSaved) {
+      showResult(true);
+      return;
+    }
     const start = () => {
-      const scratch = setupScratch(stage, canvas, onReveal);
+      const scratch = setupScratch(stage, canvas, () => showResult(false));
       all.addEventListener('click', () => scratch.revealAll());
     };
     if (typeof window.requestAnimationFrame === 'function') window.requestAnimationFrame(start);
     else start();
-    const close = dialog.querySelector('.prize-dialog-close');
-    if (close) close.focus({ preventScroll: true });
   }
 
   function closePrizeDialog() {
@@ -589,8 +663,8 @@
     const open = element('button', 'secret-open');
     open.type = 'button';
     open.setAttribute('aria-haspopup', 'dialog');
-    open.setAttribute('aria-label', `特賞 ${number}のスクラッチを削る`);
-    open.append(element('span', 'secret-open-icon', '✦'), element('span', '', 'スクラッチを削る'));
+    open.setAttribute('aria-label', `特賞 ${number}のスクラッチチャンスに挑戦する`);
+    open.append(element('span', 'secret-open-icon', '✦'), element('span', '', 'スクラッチチャンス'));
     open.firstChild.setAttribute('aria-hidden', 'true');
     card.append(open);
     card.classList.add('is-clickable');

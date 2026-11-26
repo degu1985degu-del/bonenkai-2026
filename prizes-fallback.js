@@ -177,7 +177,22 @@ window.PRIZES_FALLBACK = {
       "name": "特賞（Apple製品）",
       "qty": 1,
       "secret": true,
-      "hint": "Apple製品"
+      "hint": "Apple製品",
+      "reveal": {
+        "name": "MacBook Air 13インチ",
+        "model": "Apple M5チップ（10コアCPU/8コアGPU）・メモリ16GB・SSD 512GB（MDH74J/A）",
+        "color": "シルバー",
+        "image": "images/products/apple-macbook-air-13-m5-silver.webp",
+        "description": "Apple M5チップを搭載した、13インチのMacBook Air。13.6インチのLiquid Retinaディスプレイを備え、重さは1.23kg、最大18時間のビデオストリーミングに対応します。",
+        "specs": [
+          "Apple M5チップ（10コアCPU・8コアGPU・16コアNeural Engine）",
+          "13.6インチ Liquid Retinaディスプレイ（500ニト）",
+          "メモリ16GB・SSD 512GB",
+          "最大18時間のビデオストリーミング",
+          "2つのThunderbolt 4（USB-C）ポート・MagSafe 3充電ポート",
+          "12MPセンターフレームカメラ・重量1.23kg"
+        ]
+      }
     },
     {
       "no": 13,
@@ -185,7 +200,22 @@ window.PRIZES_FALLBACK = {
       "name": "特賞（Apple製品）",
       "qty": 1,
       "secret": true,
-      "hint": "Apple製品"
+      "hint": "Apple製品",
+      "reveal": {
+        "name": "MacBook Pro 14インチ",
+        "model": "Apple M6チップ（12コアCPU/12コアGPU）・メモリ16GB・SSD 1TB（MHWW4J/A）",
+        "color": "シルバー",
+        "image": "images/products/apple-macbook-pro-14-m6-silver.webp",
+        "description": "Apple M6チップを搭載した、14インチのMacBook Pro。14.2インチのLiquid Retina XDRディスプレイを備え、最大24時間のビデオストリーミングに対応します。",
+        "specs": [
+          "Apple M6チップ（12コアCPU・12コアGPU・デュアル16コアNeural Engine）",
+          "14.2インチ Liquid Retina XDRディスプレイ（SDR最大1,000ニト・HDRピーク1,600ニト）",
+          "メモリ16GB・SSD 1TB",
+          "最大24時間のビデオストリーミング",
+          "3つのThunderbolt 4（USB-C）ポート・HDMIポート・SDXCカードスロット・MagSafe 3ポート",
+          "12MPセンターフレームカメラ・重量1.55kg"
+        ]
+      }
     }
   ]
 };
